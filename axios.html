@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>axios - vue</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<!--Enlazar-->
+	<div id="main" class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-4">
+				<h1> Lista Vue.js - axios</h1>
+				<ul class="list-group">
+					<li class="list-group-item" v-for="users in lists">
+						{{ users.name }}
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-8 col-md-8">
+				<h1> Json </h1>
+				<pre>
+					{{ $data | json }}
+				</pre>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
+	<script type="text/javascript">
+		//var urlUser= 'https://randomuser.me/api/?results=50';
+		var urlUser= 'taks';
+		new Vue({
+			el:"#main",
+			created: function(){
+				this.getUsers();
+			},
+			data:{
+				lists:[]
+			},
+			methods:{
+				getUsers: function(){
+					axios.get(urlUser).then(response =>{
+						this.lists = response.data
+					});
+				}
+			}
+		});
+	</script>
+</body>
+</html>
